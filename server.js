@@ -32,13 +32,14 @@ app.post("/login", (req, res) => {
         [username, password],
         (err, result) => {
             if (err) {
-                console.error("Erreur SQL :", err); // ← ajoute ça
-                return res.status(500).json({ error: err });
+                console.error("Erreur SQL :", err); // ← OBLIGATOIRE
+                return res.status(500).json({ error: "Erreur SQL" });
             }
             res.json({ success: true });
         }
     );
 });
+
 
 // Port Railway
 const port = process.env.PORT || 3000;
