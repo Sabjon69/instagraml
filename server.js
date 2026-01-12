@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 
-const loginRoute = require("./routes/login");
+const registerRoute = require("./routes/register");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -10,10 +10,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/public/vpageinsta.html");
+    res.sendFile(__dirname + "/public/index.html");
 });
 
-app.post("/login", loginRoute);
+app.post("/register", registerRoute);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
