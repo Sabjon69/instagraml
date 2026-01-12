@@ -24,7 +24,6 @@ app.get("/test-db", (req, res) => {
     });
 });
 
-// 🔥🔥🔥 ROUTE POUR ENREGISTRER LE LOGIN 🔥🔥🔥
 app.post("/login", (req, res) => {
     const { username, password } = req.body;
 
@@ -32,7 +31,10 @@ app.post("/login", (req, res) => {
         "INSERT INTO utilisateurs (username, password) VALUES (?, ?)",
         [username, password],
         (err, result) => {
-            if (err) return res.status(500).json({ error: err });
+            if (err) {
+                console.error("Erreur SQL :", err); // ← ajoute ça
+                return res.status(500).json({ error: err });
+            }
             res.json({ success: true });
         }
     );
