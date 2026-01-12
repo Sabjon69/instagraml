@@ -9,6 +9,10 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
+app.get("/", (req, res) => {
+    res.sendFile(__dirname + "/public/vpageinsta.html");
+});
+
 app.post("/login", loginRoute);
 
 const PORT = process.env.PORT || 3000;
