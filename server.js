@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 
-const registerRoute = require("./route/register");
+const registerRoute = require("./routes/register");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -17,5 +17,5 @@ app.post("/register", registerRoute);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log("Serveur lancé sur le portt " + PORT);
+    console.log("Serveur lancé sur le port " + PORT);
 });
