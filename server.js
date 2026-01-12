@@ -1,50 +1,17 @@
 const express = require("express");
-const path = require("path");
-require("dotenv").config();
-const db = require("./connection");
-
 const app = express();
+require("dotenv").config();
 
-// Pour lire JSON si tu fais des POST
+const loginRoute = require("./routes/login");
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Servir le dossier public
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static("public"));
 
-// Page principale
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "vpageinsta.html"));
-});
+app.post("/login", loginRoute);
 
-// Exemple de route test MySQL
-app.get("/test-db", (req, res) => {
-    db.query("SELECT NOW() AS time", (err, result) => {
-        if (err) return res.status(500).json({ error: err });
-        res.json(result);
-    });
-});
-
-app.post("/login", (req, res) => {
-    const { username, password } = req.body;
-
-   db.query(
-    "INSERT INTO test_users (username, password) VALUES (?, ?)",
-    [username, password],
-    (err, result) => {
-        if (err) {
-            console.error("Erreur SQL :", err);
-            return res.status(500).json({ error: "Erreur SQL" });
-        }
-        res.json({ success: true });
-    }
-);
-
-});
-
-
-
-// Port Railway
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-    console.log("Serveur lancé sur le port " + port);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log("Serveur lancé sur le port " + PORT);
 });
