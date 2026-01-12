@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 
-const registerRoute = require("./routes/register");
+const registerRoute = require("./route/register");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
