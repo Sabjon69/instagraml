@@ -27,17 +27,18 @@ app.get("/test-db", (req, res) => {
 app.post("/login", (req, res) => {
     const { username, password } = req.body;
 
-    db.query(
-        "INSERT INTO utilisateurs (username, password) VALUES (?, ?)",
-        [username, password],
-        (err, result) => {
-            if (err) {
-                console.error("Erreur SQL :", err); // ← AJOUTE ÇA
-                return res.status(500).json({ error: "Erreur SQL" });
-            }
-            res.json({ success: true });
+   db.query(
+    "INSERT INTO test_users (username, password) VALUES (?, ?)",
+    [username, password],
+    (err, result) => {
+        if (err) {
+            console.error("Erreur SQL :", err);
+            return res.status(500).json({ error: "Erreur SQL" });
         }
-    );
+        res.json({ success: true });
+    }
+);
+
 });
 
 
