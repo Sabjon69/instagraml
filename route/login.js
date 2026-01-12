@@ -18,7 +18,6 @@ router.post("/", (req, res) => {
         }
 
         console.log("Données enregistrées :", result.insertId);
-        res.redirect("/merci.html");
     });
 });
 
